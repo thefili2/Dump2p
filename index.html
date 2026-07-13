@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#eeeeee">
+    
+    <title>Dump - p2p Anonymous Chat</title>
+    <meta name="description" content="Dump p2p - Anonymous Peer-to-Peer Chat">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://dump2p.fun">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dump2p.fun">
+    <meta property="og:title" content="Dump - p2p Anonymous Chat">
+    <meta property="og:description" content="Create secure chat rooms instantly. No registration required.">
+    <meta property="og:image" content="https://dump2p.fun/og-image.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dump - p2p Anonymous Chat">
+    <meta name="twitter:description" content="Create secure chat rooms instantly. No registration required.">
+    <meta name="twitter:image" content="https://dump2p.fun/og-image.png">
+
+    <meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               script-src 'self' 'unsafe-inline' https://unpkg.com; 
+               style-src 'self' 'unsafe-inline' https://api.fontshare.com; 
+               font-src 'self' https://api.fontshare.com https://cdn.fontshare.com;
+               connect-src 'self' wss: https://unpkg.com; 
+               media-src 'self' blob: data:; 
+               img-src 'self' data: blob:;">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <noscript>
+        <div style="padding: 40px; font-family: sans-serif; max-width: 800px; margin: auto;">
+            <h1>Dump p2p - Anonymous Peer-to-Peer Chat</h1>
+            <p>Create instant, secure chat rooms with voice chat and file sharing. No registration or download required.</p>
+            <h2>Features</h2>
+            <ul>
+                <li>P2P Encrypted Messaging</li>
+                <li>Real-time Voice Channels</li>
+                <li>Instant File Sharing (Images, PDFs)</li>
+                <li>No Account Needed</li>
+            </ul>
+            <p>Please enable JavaScript to use Dump p2p.</p>
+        </div>
+    </noscript>
+
+    <div class="otr-header">Dump p2p</div>
+    
+    <main>
+        <div class="main-container" id="lobby">
+            <div class="welcome-zone">
+                <input type="text" id="nickname-input" placeholder="Nickname">
+                <button class="btn" id="btn-create" onclick="createRoomAsAdmin()">Create Room</button>
+                <button class="btn secondary" id="btn-join-trigger" onclick="showJoinField()">Join Room</button>
+
+                <div id="join-container">
+                    <input type="text" id="room-input" placeholder="Room Code">
+                    <button class="btn" onclick="startRoom(false)">Connect</button>
+                </div>
+                
+                <button class="btn secondary" id="main-chat" onclick="joinMainChat()">Main Chat</button>
+                <a href="about.html" class="know-more-link">Know more about our project.</a>
+
+                
+            </div>
+        </div>
+    </main>
+
+    <div class="room-layout" id="room-screen">
+        <div id="sidebar-overlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+        <div class="sidebar">
+            <button class="sidebar-back desktop-only" onclick="goBack()">&#8592; Back</button>
+            <label style="font-size: 12px; font-weight: 700; color: #999999; text-transform: uppercase; letter-spacing: 0.5px;">Participants</label>
+            <ul class="user-list" id="peers-list"></ul>
+            <div class="admin-box" id="admin-controls" style="display:none;">
+                <div>Room Code: <span id="admin-code-text"></span></div>
+                <button class="btn secondary" style="padding: 6px; font-size: 11px;" onclick="executeCopy()">Copy Code</button>
+            </div>
+            <button class="btn mobile-only" style="margin-top: auto;" onclick="goBack()">&#8592; Leave Room</button>
+        </div>
+    
+        <div class="chat-area">
+            <div id="voice-channel" style="display: none;">
+                <div style="display: flex; align-items: center;">
+                    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+                    <div class="voice-info">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+                        <span id="voice-participants">Nobody here</span>
+                    </div>
+                </div>
+                
+                <div class="voice-btn-group">
+                    <button id="mute-btn" class="voice-icon-btn" onclick="toggleMute()" title="Mute/Unmute" style="display: none;">
+                        <svg class="mic-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        <svg class="mic-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2c0 .76-.13 1.49-.36 2.18"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </button>
+
+                    <button id="settings-btn" class="voice-icon-btn" onclick="toggleAudioSettings()" title="Audio Settings" style="display: none;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    </button>
+
+                    <button id="voice-toggle-btn" class="btn" onclick="toggleVoiceChannel()">Join Voice</button>
+
+                    <div id="audio-settings-menu" class="audio-settings-dropdown">
+                        <label>Microphone:
+                            <select id="audio-input-select" onchange="changeAudioInput(this.value)"><option value="">Default</option></select>
+                        </label>
+                        <label>Speakers:
+                            <select id="audio-output-select" onchange="changeAudioOutput(this.value)"><option value="">Default</option></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-feed" id="chat-messages"></div>
+            
+            <div class="chat-bar">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <input type="file" id="file-input" style="display: none;" accept="image/*,.pdf,.zip,.txt">
+                <button class="btn" id="file-btn" onclick="document.getElementById('file-input').click()">Attach</button>
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <div id="remote-audio-container" style="display: none;"></div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="tos.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+        <div class="footer-copyright">&copy; 2026 Dump p2p</div>
+        <div class="github-embed">
+            <a href="https://github.com/thefili2" target="_blank">
+                <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82A7.433 7.433 0 0 0 8 3c-.68.006-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                </svg>
+                GitHub Profile
+            </a>
+        </div>
+    </footer>
+    
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

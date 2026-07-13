@@ -1,0 +1,183 @@
+.welcome-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto; 
+    align-items: center;
+}
+.welcome-zone label {
+    font-size: 13px;
+    color: #333;
+}
+
+.welcome-zone input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 1.4;
+    height: 50px;
+}
+
+.welcome-zone input:focus {
+    outline: 1px solid #999;
+}
+
+.welcome-zone .btn {
+    padding: 14px 16px;
+    font-size: 16px;
+    height: 50px;
+}
+
+.welcome-zone .btn:not(.secondary) {
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+}
+
+.welcome-zone .btn:not(.secondary):hover {
+    background: #333;
+}
+
+#join-container {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.btn {
+    background: #ddd;
+    color: #000;
+    border: 1px solid #bbb;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.btn:hover {
+    background: #ccc;
+}
+
+.btn.secondary {
+    background: #fff;
+    color: #000;
+    border: 1px solid #999;
+}
+
+.btn.secondary:hover {
+    background: #eee;
+}
+
+.btn.danger {
+    background: #fff;
+    color: #900;
+    border: 1px solid #900;
+    padding: 2px 6px;
+    font-size: 11px;
+    width: auto;
+}
+
+.btn.danger:hover {
+    background: #900;
+    color: #fff;
+}
+
+.sidebar-back {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+    font-family: sans-serif;
+    margin-bottom: 12px;
+}
+
+.sidebar-back:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.user-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    font-size: 13px;
+}
+
+.admin-box {
+    padding: 10px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+}
+
+.admin-box div {
+    color: #555;
+}
+
+.admin-box span {
+    font-weight: bold;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.admin-box .btn.secondary {
+    margin-top: 8px;
+    width: 100%;
+}
+
+.know-more-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.know-more-link:hover {
+    text-decoration: underline;
+}
+
+#main-chat{
+    margin-top: 20px;
+}
+
+#file-btn {
+    background: #2980b9;
+    color: #fff;
+    border: 1px solid #2980b9;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    width: auto;
+    font-family: sans-serif;
+}

@@ -88,22 +88,6 @@ http://localhost:5000
 
 > **Important:** WebRTC requires a secure context (HTTPS) to work correctly, especially for microphone access and file sharing on some browsers. It works locally on `localhost`, but production deployments require SSL/HTTPS (for example with Nginx/Caddy and Let's Encrypt).
 
-## Project Structure
-
-```text
-.
-├── app.py                 # Flask backend (API, database, cleanup)
-├── static/
-│   ├── css/
-│   │   └── style.css      # Main stylesheet
-│   └── js/
-│       └── main.js        # P2P logic, UI, chat, voice
-├── index.html             # Main page
-├── about.html             # How it works
-├── tos.html               # Terms of Service
-├── privacy.html           # Privacy Policy
-└── README.md
-```
 
 ## License
 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Dump p2p</title>
+    <meta name="description" content="Dump p2p - Anonymous Peer-to-Peer Chat">
+    <meta name="theme-color" content="#eeeeee">
+    
+    <meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               script-src 'self' 'unsafe-inline'; 
+               style-src 'self' 'unsafe-inline' https://api.fontshare.com; 
+               font-src 'self' https://api.fontshare.com https://cdn.fontshare.com;
+               connect-src 'self' wss:; 
+               media-src 'self' blob: data:; 
+               img-src 'self' data: blob:;">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="otr-header">Dump p2p</div>
+    <div style="padding: 12px 16px;">
+    <button class="sidebar-back" onclick="location.href='index.html'">&#8592; Back to Home</button>
+    </div>
+    <div class="main-container" style="justify-content: flex-start; padding-top: 40px;">
+        <div class="legal-page">
+            <h1>Privacy Policy</h1>
+            <p>Last updated: July 2025</p>
+
+            <h2>Data Controller</h2>
+            <p>This service is operated by an independent developer.</p>
+
+            <h2>Architecture & Data Processed</h2>
+            <p>Dump p2p utilizes a hybrid architecture. Data handling differs based on the feature used:</p>
+            
+            <h3>1. Main Chat (Server-Backed)</h3>
+            <ul>
+                <li><strong>Messages:</strong> Transmitted through and temporarily stored on our server to provide chat history. Messages are <strong>automatically permanently deleted after 24 hours</strong>.</li>
+                <li><strong>Nickname & Tag:</strong> Stored temporarily in the database to show "Online Users". Deleted when you leave or close the tab.</li>
+            </ul>
+
+            <h3>2. Private Rooms, Voice, & Files (Peer-to-Peer)</h3>
+            <ul>
+                <li><strong>Messages, Audio, and Files:</strong> Transmitted directly between browsers using WebRTC. <strong>This data never touches our servers.</strong></li>
+                <li><strong>IP Address:</strong> Temporarily transmitted to the PeerJS signaling server (third party) solely to establish the initial P2P connection. Not logged or retained by us.</li>
+                <li><strong>Microphone Access:</strong> Requested locally by your browser only when you explicitly click "Join Voice" in a private room. Audio is never recorded or stored.</li>
+            </ul>
+
+            <h2>Purpose of Processing</h2>
+            <p>Data is processed exclusively to enable the chat, voice, and file sharing services to function.</p>
+
+            <h2>Legal Basis</h2>
+            <p>Processing is based on user consent. By using the service, you accept this privacy policy (Art. 6(1)(a) of the GDPR).</p>
+
+            <h2>Third Parties</h2>
+            <p>We use the public PeerJS signaling server (peerjs.com) to enable the initial connection between peers for Private Rooms and Voice. This service is operated by a third party and is subject to its own privacy policy.</p>
+
+            <h2>Data Retention</h2>
+            <p><strong>Main Chat:</strong> Messages are automatically purged from the database after 24 hours. Online status is deleted immediately upon leaving.</p>
+            <p><strong>Private Rooms/Voice:</strong> No data is retained on our end. Data exists only in the browsers' temporary memory during an active session and disappears when the page is closed.</p>
+
+            <h2>Cookies & Local Storage</h2>
+            <p>This service does not use cookies. It uses browser `sessionStorage` to temporarily remember your anonymous tag during a single tab session, which is deleted when the tab is closed.</p>
+
+            <h2>Complaint</h2>
+            <p>You have the right to lodge a complaint with a data protection authority in your EU member state.</p>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-copyright">&copy; 2026 Dump p2p</div>
+        <div class="github-embed">
+            <a href="https://github.com/thefili2" target="_blank">
+                <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82A7.433 7.433 0 0 0 8 3c-.68.006-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                </svg>
+                GitHub Profile
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
